@@ -58,16 +58,7 @@ public class UserDao {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        ConnectionMaker cm = new DConnectionMaker();
-        UserDao ud = new UserDao(cm);
-        User user = new User();
-        user.setId("2");
-        user.setName("jungjae");
-        user.setPassword("1111");
-//        ud.add(user);
 
-        User selectUser = ud.get("2");
-        System.out.printf("%s %s %s",selectUser.getId(),selectUser.getName(),selectUser.getPassword());
     }
 
 }
