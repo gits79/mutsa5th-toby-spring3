@@ -12,8 +12,8 @@ public class UserDao {
 //    SimpleConnectionMaker connectionMaker = new SimpleConnectionMaker();
     ConnectionMaker connectionMaker;
 
-    public UserDao() {
-        this.connectionMaker = new DConnectionMaker();
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
@@ -58,7 +58,8 @@ public class UserDao {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserDao ud = new UserDao();
+        ConnectionMaker cm = new DConnectionMaker();
+        UserDao ud = new UserDao(cm);
         User user = new User();
         user.setId("2");
         user.setName("jungjae");
