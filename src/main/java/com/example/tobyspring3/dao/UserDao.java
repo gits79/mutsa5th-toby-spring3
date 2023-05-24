@@ -9,13 +9,17 @@ import static java.lang.System.getenv;
 
 public class UserDao {
 
-    SimpleConnectionMaker connectionMaker = new SimpleConnectionMaker();
+//    SimpleConnectionMaker connectionMaker = new SimpleConnectionMaker();
+    ConnectionMaker connectionMaker;
 
-
+    public UserDao() {
+        this.connectionMaker = new DConnectionMaker();
+    }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
 
-        Connection conn = connectionMaker.makeNewConnection();
+//        Connection conn = connectionMaker.makeNewConnection();
+        Connection conn = connectionMaker.makeConnection();
 
         PreparedStatement pstmt = conn.prepareStatement("insert into users(id,name,password) " +
                 "values (?,?,?)");
@@ -31,7 +35,8 @@ public class UserDao {
 
     public User get(String id) throws ClassNotFoundException, SQLException {
 
-        Connection conn = connectionMaker.makeNewConnection();
+//        Connection conn = connectionMaker.makeNewConnection();
+        Connection conn = connectionMaker.makeConnection();
 
         PreparedStatement pstmt = conn.prepareStatement("select id, name, password from users where id = ?");
         pstmt.setString(1,id);
@@ -60,7 +65,7 @@ public class UserDao {
         user.setPassword("1111");
 //        ud.add(user);
 
-        User selectUser = ud.get("1");
+        User selectUser = ud.get("2");
         System.out.printf("%s %s %s",selectUser.getId(),selectUser.getName(),selectUser.getPassword());
     }
 
